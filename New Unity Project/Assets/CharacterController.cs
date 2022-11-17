@@ -4,16 +4,40 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    float maxspeed = 1.0f;
+    public float maxSpeed = 1.0f;
     float rotation = 0.0f;
-    
+    float camRotation = 0.0f;
+    GameObject cam;
+    Rigidbody myRigidbody;
 
-    float maxspeed = 3.0f;
-    void Update()
+    bool isOnGround;
+    public GameObject groundChecker;
+    public LayerMask groundLayer;
+    public float jumpForce = 300.0f;
+
+    float rotationSpeed = 2.0f;
+    float camRotationSpeed = 1.5f;
+
+     void Start()
     {
-        transform.position = transform.position + (transform.forward * Input.GetAxis("Vertical") * maxspeed);
+        cam = GameObject.Find("MainCamera");
+        myRigidbody = GetComponent<Rigidbody>();
+    }
+
+
+    void Update()
+    {  
+        isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+    
+        transform.position = transform.position + (transform.forward * Input.GetAxis("Vertical") * maxSpeed);
+
+        Vector3 newVelocity = (transform.forward * Input.GetAxis("Vertical") * maxSpeed) + (transform.right * Input.GetAxis("Horizontal") * maxSpeed);
+        myRigidbody.velocity = new Vector3(newVelocity.x, myRigidbody.velocity.y, newVelocity.z);
 
         rotation = rotation + Input.GetAxis("Mouse X");
-        transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation));
+        transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
+
+        camRotation = camRotation + Input.GetAxis("Mouse Y");
+        cam.transform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0.0f, 0.0f));
     }
 }
