@@ -15,8 +15,8 @@ public class CharacterController : MonoBehaviour
     public LayerMask groundLayer;
     public float jumpForce = 300.0f;
 
-    float rotationSpeed = 2.0f;
-    float camRotationSpeed = 1.5f;
+    public float rotationSpeed = 2.0f;
+    public float camRotationSpeed = 1.5f;
 
      void Start()
     {
@@ -28,6 +28,11 @@ public class CharacterController : MonoBehaviour
     void Update()
     {  
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+
+        if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            myRigidbody.AddForce(transform.up * jumpForce);
+        }
     
         transform.position = transform.position + (transform.forward * Input.GetAxis("Vertical") * maxSpeed);
 
@@ -39,5 +44,7 @@ public class CharacterController : MonoBehaviour
 
         camRotation = camRotation - Input.GetAxis("Mouse Y");
         cam.transform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0.0f, 0.0f));
+
+        camRotation = Mathf.Clamp(camRotation, -40.0f, 40.0f);
     }
 }
