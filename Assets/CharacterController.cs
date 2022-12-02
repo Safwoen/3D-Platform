@@ -18,10 +18,10 @@ public class CharacterController : MonoBehaviour
     public float rotationSpeed = 2.0f;
     public float camRotationSpeed = 1.5f;
     
-     Animator myAnim;
+     public Animator myAnim;
 
      void Start()
-     {
+    {
          
 
         myAnim = GetComponentInChildren<Animator>();
