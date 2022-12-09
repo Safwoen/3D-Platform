@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb40d5c4ba82cc409ebd0565ba0350b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0.02
+  maxSpeed: 0.2
   groundChecker: {fileID: 793953822}
   groundLayer:
     serializedVersion: 2
