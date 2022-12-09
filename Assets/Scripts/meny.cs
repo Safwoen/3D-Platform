@@ -7,7 +7,7 @@ public class meny : MonoBehaviour
 {
  public void PlayGame()
  {
-     UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    SceneManager.LoadScene(1);
  }
  public void QuitGame()
  {
